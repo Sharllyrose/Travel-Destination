@@ -17,7 +17,7 @@ Global Travel Finder is an easy-to-use web application designed to help users di
 ## Problem statement
 
 Travel enthusiasts often struggle to find destinations that align with their specific interests, whether for a relaxing getaway, an adventurous trip, or a cultural exploration. With so many places to visit around the world, it can be
-overwhelming to narrow down the options and find a destination that fits personal preferences.
+overwhelming to narrow the options and find a destination that fits personal preferences.
 
 ## Solution
 
@@ -27,12 +27,12 @@ to provide suggestions for cities and countries.
 
 ## Technologies Used in Development
 
-The app has been developed by the use of the following technologies:
+The use of the following technologies has developed the app:
 * HTML(Hypertext Markup Language)
 * CSS(Cascading Sttyle Sheets)
 * ReactJS
 * A deployed server 
-* db.json file containing external data 
+* The db.json file containing external data 
 
 # Installation
 
@@ -63,9 +63,9 @@ recommendations.
 
 **Brief history of Destination Search:** Users receive a brief history of the travel destination search and what is expected from the country (e.g., the best time to travel, cost of travel)
 
-**Offer ravel tips relevant to the Destination Search:** The web application offers a relevant travel tip based of several factors (eg, Weather conditions and Time of travel)
+**Offer ravel tips relevant to the Destination Search:** The web application offers a relevant travel tip based on several factors (eg, Weather conditions and Time of travel)
 
-**Book travel trips:** The web application allows users to book for travel trips based on the number of people and the number of days to be spent
+**Book travel trips:** The web application allows users to book travel trips based on the number of people and the number of days to be spent
 
 **Add a travel destination**
 
@@ -73,7 +73,7 @@ recommendations.
 
 After installation of the web application, a user can:
  * **Explore Destinations:** Browse destination recommendations based on your preferences.
- * **Explore new interests:** Browse new locations and discover underrated locations or discover new interests.
+ * **Explore new interests:** Browse new locations and discover underrated locations, or discover new interests.
 
 
 # Contributions
@@ -92,5 +92,5 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 # Acknowledgement
 
-Special thanks to the team for their creativity and skills portrayed in development of this project.
+Special thanks to the team for their creativity and skills portrayed in the development of this project.
 
