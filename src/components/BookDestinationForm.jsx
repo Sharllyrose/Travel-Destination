@@ -132,8 +132,12 @@ END:VCALENDAR`;
               min={1}
             />
           </label>
-          <p>Total Cost: $ {totalCost}</p>
-          <p>Average Cost per Day: $ {averageCostPerDay.toFixed(2)}</p>{" "}
+          <p className="cost-info">
+            Total Cost: <span>$ {totalCost}</span>
+          </p>
+          <p className="cost-info">
+            Average Cost per Day: <span>$ {averageCostPerDay.toFixed(2)}</span>
+          </p>
           <button type="submit">Submit</button>
         </form>
       </div>
