@@ -1,8 +1,7 @@
-
-
 import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
 import DestinationGrid from "./components/DestinationGrid";
+import DestinationForm from "./components/DestinationForm";
 import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
@@ -44,6 +43,14 @@ function App() {
   };
 
   return (
+    <Router>
+      <Header />
+      <Routes>
+        <Route path="/" element={<DestinationGrid />} />
+        <Route path="/add-destination" element={<DestinationForm />} />
+      </Routes>
+      <Footer />
+    </Router>
     <>
       <Header 
         user={user} 
@@ -78,6 +85,7 @@ function App() {
       <DestinationGrid />
       <Footer />
     </>
+
   );
 }
 

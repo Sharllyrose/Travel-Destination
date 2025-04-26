@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import DestinationModal from "./DestinationModal";
 import "./DestinationCard.css";
 
 function getStarRating(rating) {
@@ -24,26 +25,43 @@ function getStarRating(rating) {
 }
 
 const DestinationCard = ({ destination }) => {
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const handleViewDetails = () => {
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
+
   return (
-    <div className="destination-card">
-      <img
-        src={destination.image}
-        alt={destination.name}
-        className="destination-img"
-      />
-      <div className="destination-info">
-        <h3>{destination.name}</h3>
-        <p className="location">
-          {destination.country}, {destination.continent}
-        </p>
-        <div className="rating">{getStarRating(destination.rating)}</div>
-        <p className="description">{destination.description}</p>
-        <button className="view-btn" data-id={destination.id}>
-          View Details
-
-        </button>
+    <>
+      <div className="destination-card">
+        <img
+          src={destination.image}
+          alt={destination.name}
+          className="destination-img"
+        />
+        <div className="destination-info">
+          <h3>{destination.name}</h3>
+          <p className="location">
+            {destination.country}, {destination.continent}
+          </p>
+          <div className="rating">{getStarRating(destination.rating)}</div>
+          <p className="description">{destination.description}</p>
+          <button className="view-btn" onClick={handleViewDetails}>
+            View Details
+          </button>
+        </div>
       </div>
-    </div>
-  )};
+      <DestinationModal
+        destination={destination}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
+    </>
+  );
+};
 
-  export default DestinationCard
+export default DestinationCard;
