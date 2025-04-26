@@ -1,49 +1,64 @@
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './login.css';
 
-function Login({ onLogin }) {
-  const [formData, setFormData] = useState({ username: "", password: "" });
-  const [error, setError] = useState("");
+function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-  function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    fetch(`http://localhost:3000/users=${formData.username}`)
-      .then((res) => res.json())
-      .then((users) => {
-        const user = users[0];
-        if (user && user.password === formData.password) {
-          sessionStorage.setItem("currentUser", JSON.stringify(user));
-          onLogin(user);
-        } else {
-          setError("Invalid username or password");
-        }
-      })
-      .catch((err) => {
-        console.error("Login failed:", err);
-        setError("Login failed. Please check your connection or try again later.");
-      });
-  }
+    try {
+      // Fetch all users and filter by email
+      const response = await fetch(`http://localhost:3000/users?email=${email}`);
+      const users = await response.json();
+
+      if (users.length === 0) {
+        alert('Invalid email or password!');
+        return;
+      }
+
+      // Check if password matches (not secure, see note below)
+      const user = users[0];
+      if (user.password === password) {
+        localStorage.setItem('user', JSON.stringify(user));
+        alert('Login successful!');
+        navigate('/');
+      } else {
+        alert('Invalid email or password!');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred during login.');
+    }
+  };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className="login-container">
       <h2>Login</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <input
-        type="text"
-        placeholder="Username"
-        value={formData.username}
-        onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-        required
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={formData.password}
-        onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-        required
-      />
-      <button type="submit">Login</button>
-    </form>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit">Login</button>
+      </form>
+      <p>
+        Don't have an account? <a href="/signup">Sign Up</a>
+      </p>
+    </div>
   );
 }
 
