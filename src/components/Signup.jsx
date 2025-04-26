@@ -1,49 +1,65 @@
 
+import React, { useState } from 'react';
+import './signup.css';
 
-import React, { useState } from "react";
+function Signup({ onSignup, onClose, onSwitchToLogin }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-function Signup({ onSignup }) {
-  const [formData, setFormData] = useState({ username: "", password: "" });
-
-  function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    fetch("http://localhost:3000/users", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    })
-      .then((res) => res.json())
-      .then((newUser) => {
-        //this is for storing it in the session 
+    try {
+      const response = await fetch('http://localhost:3001/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-        sessionStorage.setItem("currentUser", JSON.stringify(newUser));
-        onSignup(newUser);
-      })
-      .catch((err) => {
-        console.error("Signup failed:", err);
-        alert("Signup failed. Please check your connection or try again later.");
-      }) ;
-  }
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const user = await response.json();
+      onSignup(user); // Call onSignup prop to handle user data
+      alert('Signup successful!');
+    } catch (error) {
+      console.error('Signup error:', error.message);
+      alert(`Signup failed: ${error.message}`);
+    }
+  };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Sign Up</h2>
-      <input
-        type="text"
-        placeholder="Username"
-        value={formData.username}
-        onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-        required
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={formData.password}
-        onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-        required
-      />
-      <button type="submit">Create Account</button>
-    </form>
+    <div className="signup-container">
+      <form onSubmit={handleSubmit}>
+        <button type="button" className="close-button" onClick={onClose}>
+          &times;
+        </button>
+        <h2>Sign Up</h2>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit">Sign Up</button>
+        <p>
+          Already have an account?{' '}
+          <a href="#" onClick={onSwitchToLogin}>
+            Login
+          </a>
+        </p>
+      </form>
+    </div>
   );
 }
 
