@@ -1,11 +1,19 @@
-
 {
-    "users": [
-      {
-        "id": 1,
-        "username": "exampleman!",
-        "password": "1234"
-      }
-    ]
-  }
-  
+  "users": [
+    {
+      "id": 1,
+      "username": "exampleman!",
+      "password": "1234"
+    },
+    {
+      "email": "Sharllyrose@gmail.com",
+      "password": "sharlly",
+      "id": 2
+    },
+    {
+      "email": "sharllyrose100@gmail.com",
+      "password": "Sharllrose@7",
+      "id": 3
+    }
+  ]
+}
