@@ -7,7 +7,7 @@ function Login({ onLogin }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    fetch(`http://localhost:6001/users?username=${formData.username}`)
+    fetch(`http://localhost:3000/users=${formData.username}`)
       .then((res) => res.json())
       .then((users) => {
         const user = users[0];
@@ -17,6 +17,10 @@ function Login({ onLogin }) {
         } else {
           setError("Invalid username or password");
         }
+      })
+      .catch((err) => {
+        console.error("Login failed:", err);
+        setError("Login failed. Please check your connection or try again later.");
       });
   }
 

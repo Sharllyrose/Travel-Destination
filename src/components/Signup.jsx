@@ -6,7 +6,7 @@ function Signup({ onSignup }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    fetch("http://localhost:6001/users", {
+    fetch("http://localhost:3000/users", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
@@ -17,7 +17,11 @@ function Signup({ onSignup }) {
 
         sessionStorage.setItem("currentUser", JSON.stringify(newUser));
         onSignup(newUser);
-      });
+      })
+      .catch((err) => {
+        console.error("Signup failed:", err);
+        alert("Signup failed. Please check your connection or try again later.");
+      }) ;
   }
 
   return (
